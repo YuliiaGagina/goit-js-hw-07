@@ -31,7 +31,7 @@ refs.galleryEl.innerHTML = makeGalleryMarkups(galleryItems);
 refs.galleryEl.addEventListener('click', showBigPictureOnWholeScreen);
 
 
-
+let instance;
 function showBigPictureOnWholeScreen(event) {
   
    
@@ -40,13 +40,17 @@ function showBigPictureOnWholeScreen(event) {
       
   const picture = galleryItems.find(item =>{return item.original === event.target.dataset.source })
        
-  const instance = basicLightbox.create(`
+   instance = basicLightbox.create(`
   <img src="${picture.original}" width="800" height="600">`)
       
 
      instance.show()
       document.addEventListener('keydown', closeModal); 
-         function closeModal(evt) {
+        
+    }
+}
+
+ function closeModal(evt) {
        
           if (evt.code === 'Escape') {
             instance.close();
@@ -57,10 +61,6 @@ function showBigPictureOnWholeScreen(event) {
           }
           
         }
-    }
-}
-
-
 
 
  
