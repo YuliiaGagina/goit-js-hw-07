@@ -33,21 +33,34 @@ refs.galleryEl.addEventListener('click', showBigPictureOnWholeScreen);
 
 
 function showBigPictureOnWholeScreen(event) {
-    
+  
+   
     if (event.target.closest('.gallery__link')) {
-        event.preventDefault();
-
-    const picture = galleryItems.find(item =>{return item.original === event.target.dataset.source })
+      event.preventDefault();
+      
+  const picture = galleryItems.find(item =>{return item.original === event.target.dataset.source })
        
-    const instance = basicLightbox.create(`
-    <img src="${picture.original}" width="800" height="600">
-`)
-return instance.show()
-    
-      }
-    
- 
+  const instance = basicLightbox.create(`
+  <img src="${picture.original}" width="800" height="600">`)
+      
+
+     instance.show()
+      document.addEventListener('keydown', closeModal); 
+         function closeModal(evt) {
+       
+          if (evt.code === 'Escape') {
+            instance.close();
+            document.removeEventListener('keydown', closeModal);
+            
+            
+           
+          }
+          
+        }
+    }
 }
 
 
 
+
+ 
